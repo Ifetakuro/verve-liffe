@@ -3,8 +3,8 @@ import {TouchableOpacity, View, StyleSheet} from 'react-native';
 
 const CustomBtn = ({children, style, onPress}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.radius}>
-      <View style={[styles.appButton, style]}>{children}</View>
+    <TouchableOpacity onPress={onPress} style={style}>
+      <View style={styles.appButton}>{children}</View>
     </TouchableOpacity>
   );
 };
@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     gap: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 3,
   },
 });
 

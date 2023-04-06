@@ -5,6 +5,8 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import HomeScreen from '../screens/HomeScreen';
 import QuestionImage from '../components/QuestionImage';
+import InterestsScreen from '../screens/InterestsScreen';
+import LogoImage from '../components/LogoImage';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,9 +43,20 @@ const AppStack = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerRight: () => <QuestionImage />,
+          headerRight: props => <QuestionImage />,
           headerTitleAlign: 'center',
           headerTintColor: '#4B4B4B',
+        }}
+      />
+      <Stack.Screen
+        name="Interests"
+        component={InterestsScreen}
+        options={{
+          headerTitle: props => <LogoImage />,
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTitleAlign: 'center',
         }}
       />
     </Stack.Navigator>

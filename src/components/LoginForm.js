@@ -1,14 +1,8 @@
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import CustomBtn from './CustomBtn';
 import CustomInput from './CustomInput';
+import FloatingTextInput from './FloatingTextInput';
 
 const LoginForm = ({onSubmit, showNext}) => {
   const [emailOrTel, setEmailOrTel] = useState('');
@@ -21,44 +15,44 @@ const LoginForm = ({onSubmit, showNext}) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View>
-        {showNext ? (
-          <>
-            <CustomInput
-              placeholder="(E.g. Walk)"
-              value={activity}
-              onChangeText={setActivity}
-            />
-            <CustomInput
-              placeholder="(E.g. Saturday run)"
-              value={activityName}
-              onChangeText={setActivityName}
-            />
-          </>
-        ) : (
-          <>
-            <CustomInput
-              placeholder="Email or Mobile No."
-              value={emailOrTel}
-              onChangeText={setEmailOrTel}
-            />
-            <CustomInput
-              placeholder="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={true}
-            />
-            <Text style={styles.forgot}>
-              Forgot Password? <Text style={styles.forgotSpan}>Recover</Text>
-            </Text>
-          </>
-        )}
-        <CustomBtn onPress={handleSubmit} style={styles.btn}>
-          <Text style={styles.btnText}>LOG IN</Text>
-        </CustomBtn>
-      </View>
-    </TouchableWithoutFeedback>
+    <View>
+      {showNext ? (
+        <>
+          <CustomInput
+            label={'Select an Activity'}
+            placeholder="(E.g. Walk)"
+            value={activity}
+            onChangeText={setActivity}
+          />
+          <CustomInput
+            label={'Activity Name'}
+            placeholder="(E.g. Saturday run)"
+            value={activityName}
+            onChangeText={setActivityName}
+          />
+        </>
+      ) : (
+        <>
+          <FloatingTextInput
+            label="Email or Mobile No."
+            value={emailOrTel}
+            onChangeText={setEmailOrTel}
+          />
+          <FloatingTextInput
+            label="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={true}
+          />
+          <Text style={styles.forgot}>
+            Forgot Password? <Text style={styles.forgotSpan}>Recover</Text>
+          </Text>
+        </>
+      )}
+      <CustomBtn onPress={handleSubmit} style={styles.btn}>
+        <Text style={styles.btnText}>LOG IN</Text>
+      </CustomBtn>
+    </View>
   );
 };
 

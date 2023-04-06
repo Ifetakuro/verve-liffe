@@ -1,7 +1,16 @@
-import {View, Image, Text, StyleSheet, Alert} from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CustomBtn from '../components/CustomBtn';
 import LoginForm from '../components/LoginForm';
+import {generalStyles} from '../components/generalStyle';
 
 const LoginScreen = ({navigation, route}) => {
   const [showNextLogin, setShowNextLogin] = useState(false);
@@ -35,69 +44,58 @@ const LoginScreen = ({navigation, route}) => {
 
     setShowNextLogin(true);
     console.log(emailOrTel, password);
-
-    if (showNextLogin && formIsValid) {
-      navigation.navigate('Home');
-      console.log(emailOrTel, password, activity, activityName);
-    }
   };
+
+  if (showNextLogin && formIsValid) {
+    navigation.navigate('Home');
+  }
 
   const navigateToRegister = () => {
     navigation.navigate('Register');
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Image source={logoUri} />
-        <Text style={styles.boldHeader}>
-          All your favourite things in one place
-        </Text>
-        <Text style={styles.qtLink}>
-          Click here to login with your
-          <Text style={styles.boldSpan}> Quickteller </Text> Account
-        </Text>
-        <Text style={{fontSize: 12}}>or log in with</Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={generalStyles.container}>
+        <View style={styles.header}>
+          <Image source={logoUri} />
+          <Text style={generalStyles.authenticationHeading}>
+            All your favourite things in one place
+          </Text>
+          <Text style={styles.qtLink}>
+            Click here to login with your
+            <Text style={styles.boldSpan}> Quickteller </Text> Account
+          </Text>
+          <Text style={{fontSize: 12}}>or log in with</Text>
+        </View>
+        <View style={styles.btnDiv}>
+          <CustomBtn style={[styles.btn, styles.blue]}>
+            <Image source={facebookUri} />
+            <Text style={styles.btnText}>Facebook account</Text>
+          </CustomBtn>
+          <CustomBtn style={[styles.btn, styles.red]}>
+            <Image source={googleUri} />
+            <Text style={styles.btnText}>Google account</Text>
+          </CustomBtn>
+        </View>
+        <LoginForm onSubmit={handleLogin} showNext={showNextLogin} />
+        <View>
+          <Text style={styles.reg} onPress={navigateToRegister}>
+            REGISTER
+          </Text>
+        </View>
       </View>
-      <View style={styles.btnDiv}>
-        <CustomBtn style={[styles.btn, styles.blue]}>
-          <Image source={facebookUri} />
-          <Text style={styles.btnText}>Facebook account</Text>
-        </CustomBtn>
-        <CustomBtn style={[styles.btn, styles.red]}>
-          <Image source={googleUri} />
-          <Text style={styles.btnText}>Google account</Text>
-        </CustomBtn>
-      </View>
-      <LoginForm onSubmit={handleLogin} showNext={showNextLogin} />
-      <View>
-        <Text style={styles.reg} onPress={navigateToRegister}>
-          REGISTER
-        </Text>
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 30,
-    padding: 20,
-    backgroundColor: '#fff',
-    flex: 1,
-  },
   header: {
     alignItems: 'center',
     gap: 10,
     padding: 5,
-  },
-  boldHeader: {
-    color: '#00425F',
-    fontWeight: 600,
-    fontSize: 18,
-    marginBottom: 15,
   },
   qtLink: {
     color: '#0973AA',
@@ -105,17 +103,17 @@ const styles = StyleSheet.create({
   },
   boldSpan: {fontWeight: 600},
   btnDiv: {
-    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
     gap: 10,
     marginTop: 18,
     marginBottom: 30,
   },
   btn: {
-    paddingHorizontal: 23,
+    backgroundColor: '#DF4930',
+    borderRadius: 3,
     paddingVertical: 15,
+    flex: 1,
   },
   btnText: {
     color: '#fff',

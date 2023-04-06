@@ -1,11 +1,24 @@
 import React from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import {View, TextInput, StyleSheet, Text} from 'react-native';
+import {generalStyles} from './generalStyle';
 
-const CustomInput = ({value, onChangeText, placeholder, secureTextEntry}) => {
+const CustomInput = ({
+  value,
+  onChangeText,
+  placeholder,
+  secureTextEntry,
+  style,
+  label,
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={generalStyles.inputContainer}>
+      {label && (
+        <Text style={styles.label}>
+          {label} <Text style={styles.asterisk}>*</Text>
+        </Text>
+      )}
       <TextInput
-        style={styles.input}
+        style={[generalStyles.input, style]}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -17,14 +30,12 @@ const CustomInput = ({value, onChangeText, placeholder, secureTextEntry}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 5,
+  label: {
+    color: '#00425F',
+    marginBottom: 3,
   },
-  input: {
-    borderRadius: 3,
-    paddingHorizontal: 10,
-    paddingVertical: 16,
-    backgroundColor: '#E8E8E8',
+  asterisk: {
+    color: '#DC4437',
   },
 });
 
