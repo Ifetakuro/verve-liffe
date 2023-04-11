@@ -10,25 +10,22 @@ const FloatingTextInput = ({
   keyboardType,
 }) => {
   const moveText = useRef(new Animated.Value(0)).current;
+  const [move, setMove] = useState(false);
 
   useEffect(() => {
-    if (value !== '') {
+    if (move || value !== '') {
       moveTextUp();
-    } else if (value === '') {
+    } else if (!move) {
       moveTextDown();
     }
-  }, [value]);
+  }, [move, value]);
 
   const onFocusHandler = () => {
-    if (value !== '') {
-      moveTextUp();
-    }
+    setMove(true);
   };
 
   const onBlurHandler = () => {
-    if (value === '') {
-      moveTextDown();
-    }
+    setMove(false);
   };
 
   const moveTextUp = () => {
@@ -62,13 +59,16 @@ const FloatingTextInput = ({
   return (
     <View style={generalStyles.inputContainer}>
       <Animated.View style={[styles.animatedStyle, animStyle]}>
-        <Text style={value !== '' ? styles.validLabel : styles.inValidLabel}>
+        <Text
+          style={
+            move || value !== '' ? styles.validLabel : styles.inValidLabel
+          }>
           {label}
         </Text>
       </Animated.View>
       <TextInput
         autoCapitalize={'none'}
-        style={[generalStyles.input, value !== '' && styles.input]}
+        style={[generalStyles.input, move || (value !== '' && styles.input)]}
         value={value}
         onChangeText={onChangeText}
         editable={true}

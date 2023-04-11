@@ -6,18 +6,17 @@ import {
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CustomBtn from '../components/CustomBtn';
 import LoginForm from '../components/LoginForm';
 import {generalStyles} from '../components/generalStyle';
+import {facebookUri, googleUri, logoUri} from '../assets';
 
 const LoginScreen = ({navigation, route}) => {
   const [showNextLogin, setShowNextLogin] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
-  const logoUri = require('../assets/verveLogo2.png');
-  const facebookUri = require('../assets/facebook.png');
-  const googleUri = require('../assets/google.png');
 
   const handleLogin = ({emailOrTel, password, activity, activityName}) => {
     const emailIsValid = emailOrTel.trim().length > 0;
@@ -56,7 +55,9 @@ const LoginScreen = ({navigation, route}) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={generalStyles.container}>
+      <ScrollView
+        style={generalStyles.container}
+        contentContainerStyle={{paddingBottom: 30}}>
         <View style={styles.header}>
           <Image source={logoUri} />
           <Text style={generalStyles.authenticationHeading}>
@@ -79,12 +80,13 @@ const LoginScreen = ({navigation, route}) => {
           </CustomBtn>
         </View>
         <LoginForm onSubmit={handleLogin} showNext={showNextLogin} />
-        <View>
-          <Text style={styles.reg} onPress={navigateToRegister}>
-            REGISTER
-          </Text>
+        <View style={styles.or}>
+          <Text style={styles.orText}>Or</Text>
         </View>
-      </View>
+        <CustomBtn onPress={navigateToRegister} style={styles.regBtn}>
+          <Text style={styles.reg}>REGISTER</Text>
+        </CustomBtn>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 };
@@ -125,6 +127,15 @@ const styles = StyleSheet.create({
   blue: {
     backgroundColor: '#475993',
   },
+  or: {
+    marginVertical: 15,
+  },
+  orText: {
+    textAlign: 'center',
+    fontWeight: 500,
+  },
+  regBtn: {backgroundColor: '#D1E9FE', paddingVertical: 15, borderRadius: 30},
+
   reg: {
     textAlign: 'center',
     color: '#3077BD',

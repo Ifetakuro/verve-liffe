@@ -3,11 +3,10 @@ import React, {useEffect, useState} from 'react';
 import FadeAnim from '../components/FadeAnim';
 import {generalStyles} from '../components/generalStyle';
 import HomeCarousel from '../components/HomeCarousel';
+import {bgImgUri, verveLogo} from '../assets';
 
 const WelcomeScreen = ({navigation}) => {
   const [appLoaded, setAppLoaded] = useState(false);
-  const bgImgUri = require('../assets/splashBg.png');
-  const verveLogo = require('../assets/verveLogo.png');
 
   const onPressHandler = () => {
     navigation.navigate('Login');

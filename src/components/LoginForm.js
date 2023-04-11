@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: '#3077BD',
     padding: 14,
-    marginVertical: 30,
+    marginTop: 10,
+    borderRadius: 30,
   },
   btnText: {
     fontWeight: 600,

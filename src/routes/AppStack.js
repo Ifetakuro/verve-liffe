@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import QuestionImage from '../components/QuestionImage';
 import InterestsScreen from '../screens/InterestsScreen';
 import LogoImage from '../components/LogoImage';
+import AppDetailsScreen from '../screens/AppDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,17 @@ const AppStack = () => {
       <Stack.Screen
         name="Interests"
         component={InterestsScreen}
+        options={{
+          headerTitle: props => <LogoImage />,
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name="AppDetails"
+        component={AppDetailsScreen}
         options={{
           headerTitle: props => <LogoImage />,
           headerStyle: {

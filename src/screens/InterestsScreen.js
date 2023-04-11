@@ -1,11 +1,17 @@
-import {StyleSheet, Text, View, Animated} from 'react-native';
+import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React from 'react';
 import {generalStyles} from '../components/generalStyle';
 import InterestsCircles from '../components/InterestsCircles';
+import {interestData} from '../data';
 
-const InterestsScreen = () => {
+const InterestsScreen = ({navigation}) => {
+  const navigateToAppDetails = () => {
+    navigation.navigate('AppDetails');
+  };
   return (
-    <View style={generalStyles.container}>
+    <View
+      style={generalStyles.container}
+      contentContainerStyle={{paddingBottom: 30}}>
       <View>
         <Text style={generalStyles.authenticationHeading}>
           What are your interests?
@@ -15,21 +21,28 @@ const InterestsScreen = () => {
           connect you to much more.
         </Text>
       </View>
+
+      <FlatList
+        key={4}
+        data={interestData}
+        horizontal={false}
+        contentContainerStyle={styles.circlesDiv}
+        columnWrapperStyle={styles.circles}
+        numColumns={4}
+        renderItem={({item}) => (
+          <InterestsCircles
+            label={item.title}
+            color={item.color}
+            selected={item.selected}
+          />
+        )}
+        keyExtractor={item => item.id}
+      />
+
       <View>
-        <InterestsCircles
-          selected={true}
-          label={'Bootcamp'}
-          color={'#984AE9'}
-        />
-        <InterestsCircles />
-        <InterestsCircles />
-        <InterestsCircles />
-        <InterestsCircles />
-        <InterestsCircles />
-        <InterestsCircles />
-      </View>
-      <View>
-        <Text>Next Step &gt;</Text>
+        <Text style={styles.nextBtn} onPress={navigateToAppDetails}>
+          Next Step &gt;
+        </Text>
       </View>
     </View>
   );
@@ -37,4 +50,19 @@ const InterestsScreen = () => {
 
 export default InterestsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  circlesDiv: {
+    marginVertical: 20,
+  },
+  circles: {
+    justifyContent: 'space-between',
+    marginVertical: 5,
+  },
+  nextBtn: {
+    color: '#1A73E8',
+    fontWeight: 600,
+    fontSize: 16,
+    textAlign: 'center',
+    margin: 10,
+  },
+});

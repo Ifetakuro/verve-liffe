@@ -1,0 +1,10 @@
+export const circleUri = require('./check.png');
+export const facebookUri = require('./facebook.png');
+export const logoUri = require('./verveLogo2.png');
+export const googleUri = require('./google.png');
+export const bgImgUri = require('./splashBg.png');
+export const verveLogo = require('./verveLogo.png');
+export const rewardUri = require('./reward.png');
+export const lifestyleUri = require('./lifestyle.png');
+export const wellnessUri = require('./wellness.png');
+export const digitalPaymentUri = require('./digitalPayment.png');

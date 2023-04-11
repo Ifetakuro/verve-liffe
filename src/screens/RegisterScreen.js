@@ -96,7 +96,7 @@ const RegisterScreen = ({navigation}) => {
           </Text>
         </View>
         <CustomBtn onPress={navigateToInterests} style={styles.btn}>
-          <Text style={styles.btnText}>Continue &gt;&gt;</Text>
+          <Text style={styles.btnText}>CREATE ACCOUNT</Text>
         </CustomBtn>
       </ScrollView>
     </TouchableWithoutFeedback>
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3077BD',
     padding: 14,
     marginVertical: 30,
+    borderRadius: 30,
   },
   btnText: {
     fontWeight: 600,
